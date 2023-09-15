@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "uwtweaker",
+  "version": "${version}",
+
+  "name": "uwTweaker",
+  "description": "",
+  "authors": [],
+  "contact": {},
+
+  "license": "MIT",
+  "icon": "icon.png",
+
+  "environment": "*",
+  "entrypoints": {},
+  "mixins": [
+    "uwtweaker.mixins.json",
+    "uwtweaker-common.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.22",
+    "minecraft": ">=1.20.1"
+  }
+}
