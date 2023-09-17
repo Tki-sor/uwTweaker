@@ -9,6 +9,7 @@ architectury {
 loom {
     forge {
         mixinConfig("uwtweaker-common.mixins.json")
+        mixinConfig("uwtweaker.mixins.json")
     }
 }
 
@@ -19,7 +20,12 @@ configurations {
     runtimeClasspath.extendsFrom common
     developmentForge.extendsFrom common
 }
-
+repositories {
+    // ...
+    maven {
+        url = "https://api.modrinth.com/maven"
+    }
+}
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
     // Remove the next line if you don't want to depend on the API
@@ -28,8 +34,12 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
-    implementation("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
-    runtimeOnly("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
+    modApi("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
+//    runtimeOnly("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
+
+    // Classic and simple status bars 1.0.7
+    modApi "maven.modrinth:rVTSwggw:64x8lC2h"
+
 }
 
 processResources {

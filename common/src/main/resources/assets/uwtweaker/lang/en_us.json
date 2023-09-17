@@ -1,0 +1,10 @@
+{
+  "text.autoconfig.uwtweaker.category.default": "UW Tweaker",
+  "text.autoconfig.uwtweaker.option.maxFoodLevel" : "Max Food Level",
+
+  "text.autoconfig.uwtweaker.category.upd8r": "Upd8r",
+  "text.autoconfig.uwtweaker.option.upd8r.enableUpd8r": "Enable Upd8r",
+
+  "text.autoconfig.uwtweaker.category.memorysweep": "Memory Sweep",
+  "text.autoconfig.uwtweaker.option.memorySweep.enableMemorySweep": "Enable Memory Sweep"
+}

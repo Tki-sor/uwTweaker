@@ -1,5 +1,6 @@
 package com.tkisor.uwtweaker.mixin;
 
+import com.tkisor.uwtweaker.config.UwTweakerConfig;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
@@ -11,7 +12,7 @@ import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(FoodData.class)
 public abstract class FoodDataMixin {
-    @Unique private final int uwTweaker$newLastFoodLevel = 40;
+    @Unique private final int uwTweaker$newLastFoodLevel = UwTweakerConfig.getConfig().getMaxFoodLevel();
     @Shadow private int foodLevel = uwTweaker$newLastFoodLevel;
     @Shadow private float saturationLevel = (float) (uwTweaker$newLastFoodLevel * 0.2);
     @Shadow private float exhaustionLevel;
@@ -46,6 +47,7 @@ public abstract class FoodDataMixin {
         }
 
         boolean bl = player.level().getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION);
+        // 满饥饿值
         if (bl && this.saturationLevel > 0.0F && player.isHurt() && this.foodLevel >= uwTweaker$newLastFoodLevel) {
             ++this.tickTimer;
             if (this.tickTimer >= 10) {
