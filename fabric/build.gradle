@@ -14,7 +14,14 @@ configurations {
     runtimeClasspath.extendsFrom common
     developmentFabric.extendsFrom common
 }
-
+repositories {
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+}
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
@@ -23,6 +30,9 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+
+    // CSSB classicandsimplestatusbars-Fabric-1.0.11.jar
+    modImplementation "curse.maven:classic-and-simple-status-bars-915839:4770089"
 }
 
 processResources {

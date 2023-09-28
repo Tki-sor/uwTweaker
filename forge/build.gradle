@@ -30,6 +30,9 @@ dependencies {
 
     implementation("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
     runtimeOnly("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
+
+    // CSSB classicandsimplestatusbars-1.0.11.jar
+    implementation fg.deobf("curse.maven:classic-and-simple-status-bars-915839:4770087")
 }
 
 processResources {
