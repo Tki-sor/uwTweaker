@@ -5,7 +5,7 @@ import java.util.List;
 public class Difficulty {
     private Difficulty() {}
     private static String gameDifficulty = "normal";
-    private static double gameDifficultSize = 1;
+    private static double gameDifficultSize = 0;
     private static final List<String> gameDifficultyList = List.of("easy", "normal", "hard", "inferno");
 
     public static double getGameDifficultSize() {
@@ -14,6 +14,10 @@ public class Difficulty {
 
     public static void setGameDifficultSize(double gameDifficultSize) {
         Difficulty.gameDifficultSize = gameDifficultSize;
+    }
+
+    public static void addGameDifficultSize(double gameDifficultSize) {
+        Difficulty.gameDifficultSize += gameDifficultSize;
     }
 
     public static List<String> getGameDifficultyList() {

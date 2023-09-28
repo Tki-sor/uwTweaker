@@ -1,7 +1,8 @@
 package com.tkisor.uwtweaker.forge.event;
 
-import com.mojang.logging.LogUtils;
 import com.tkisor.uwtweaker.UwTweaker;
+import com.tkisor.uwtweaker.util.PersistentData;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -10,7 +11,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.event.entity.living.MobSpawnEvent.FinalizeSpawn;
@@ -29,7 +30,6 @@ public class EntitySpawn {
     public static void onEntitySpawn(FinalizeSpawn event) {
         LivingEntity entity = event.getEntity();
         if (entity == null) return;
-//        if (entity instanceof Player) return;
 
         double attackDamageIncrease;
         if (entity instanceof Monster) {
@@ -50,11 +50,12 @@ public class EntitySpawn {
 
     @SubscribeEvent
     public static void onServerTick(TickEvent.ServerTickEvent event) {
-        if (event.phase == TickEvent.Phase.END) return;
+        if (event.side.isClient()) return;
+
     }
 
     @SubscribeEvent
-    public static void onPlayerSpawn(PlayerEvent event) {
+    public static void onPlayerSpawn(PlayerRespawnEvent event) {
         if (event.getEntity().isLocalPlayer()) return;
         if (event.getEntity() == null) return;
         playerHealth(event.getEntity());
@@ -65,6 +66,9 @@ public class EntitySpawn {
         if (event.getEntity().isLocalPlayer()) return;
         if (event.getEntity() == null) return;
         playerHealth(event.getEntity());
+
+//        PersistentData.get(event.getEntity().getServer()).putInt("UwTweaker", 233123);
+
     }
 
     public static void playerHealth(Player player) {
