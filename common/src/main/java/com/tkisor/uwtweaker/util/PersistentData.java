@@ -5,6 +5,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 
+import java.util.Map;
+
 public class PersistentData {
     private static final ResourceLocation rl = new ResourceLocation(UwTweaker.MOD_ID, "data");
 
@@ -21,7 +23,7 @@ public class PersistentData {
         return data;
     }
 
-    public CompoundTag getTag() {
+    public CompoundTag getTagData() {
         return tag;
     }
 
@@ -127,5 +129,4 @@ public class PersistentData {
     public short getShort(String key) {
         return tag.getShort(key);
     }
-
 }

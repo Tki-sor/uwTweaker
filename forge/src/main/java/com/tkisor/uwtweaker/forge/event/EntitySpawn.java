@@ -1,8 +1,6 @@
 package com.tkisor.uwtweaker.forge.event;
 
 import com.tkisor.uwtweaker.UwTweaker;
-import com.tkisor.uwtweaker.util.PersistentData;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -44,8 +42,7 @@ public class EntitySpawn {
             maxHealthIncrease = multiplier * (Math.log((Difficulty.getGameDifficultSize() / entity.getMaxHealth()) * 20) * 10 + entity.getMaxHealth() * 5 + Difficulty.getGameDifficultSize() * (1 + Math.log(entity.getMaxHealth()) * 3.5));
         }
         setMaxHealth(entity, maxHealthIncrease, AttributeModifier.Operation.ADDITION);
-
-
+        
     }
 
     @SubscribeEvent
