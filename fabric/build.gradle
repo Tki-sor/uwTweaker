@@ -15,6 +15,10 @@ configurations {
     developmentFabric.extendsFrom common
 }
 repositories {
+    // ...
+    maven {
+        url = "https://api.modrinth.com/maven"
+    }
     maven {
         url "https://cursemaven.com"
         content {
@@ -32,7 +36,7 @@ dependencies {
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
     // CSSB classicandsimplestatusbars-Fabric-1.0.11.jar
-    modImplementation "curse.maven:classic-and-simple-status-bars-915839:4770089"
+    modApi "maven.modrinth:cssb:qHBkbMUu"
 }
 
 processResources {

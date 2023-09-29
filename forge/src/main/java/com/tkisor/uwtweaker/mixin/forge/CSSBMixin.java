@@ -1,5 +1,6 @@
 package com.tkisor.uwtweaker.mixin.forge;
 
+import cn.mcxkly.classicandsimplestatusbars.other.helper;
 import cn.mcxkly.classicandsimplestatusbars.overlays.FoodLevel;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -13,24 +14,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class CSSBMixin {
     @Inject(method = "renderFoodValue", at = @At("RETURN"), remap = false)
     private void renderFoodValue(Font font, GuiGraphics guiGraphics, int x, int y, Player player, CallbackInfo ci) {
+        String text2 = null;
+        int x1 = x + 10 + font.width(helper.KeepOneDecimal(player.getFoodData().getFoodLevel()));
+        int foodMax = player.getFoodData().getLastFoodLevel(); // 饥饿最大值
         if (player.getFoodData().getSaturationLevel() > 0) {
-            //第一部分
-            double food = Math.ceil(player.getFoodData().getFoodLevel() * 10) / 10; // 饥饿度
-            int xx = x + 10;
-            String text = String.valueOf(food);
-            text = text.replace(".0", "");
-            //第二部分
-            xx = xx + font.width(text);
-            food = Math.ceil(player.getFoodData().getSaturationLevel() * 10) / 10; // 饱食度
-            text = "+" + food;
-            text = text.replace(".0", "");
-            //第三部分
-            xx = xx + font.width(text);
-            int foodMax = player.getFoodData().getLastFoodLevel(); // 饥饿最大值
-            text = String.valueOf(foodMax);
-            text = text.replace(".0", "");
-            text = "/" + text;
-            guiGraphics.drawString(font, text, xx, y - 9, 0xF4A460, false);
+            // 添加的部分 ---
+            x1 += font.width("+" + helper.KeepOneDecimal(player.getFoodData().getSaturationLevel()));
+            text2 = "/" + helper.KeepOneDecimal(foodMax);
+            guiGraphics.drawString(font, text2, x1, y - 9, 0xF4A460, false);
+        } else {
+            text2 = "/" + helper.KeepOneDecimal(foodMax);
+            guiGraphics.drawString(font, text2, x1, y - 9, 0xF4A460, false);
         }
     }
 }
