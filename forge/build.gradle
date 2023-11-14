@@ -31,6 +31,22 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+
+    maven { // Flywheel
+        url = "https://maven.tterrag.com/"
+        content {
+            // need to be specific here due to version overlaps
+            includeGroup("com.jozufozu.flywheel")
+        }
+    }
+
+    maven { // Create Forge and Registrate Forge
+        url = "https://maven.tterrag.com/"
+        content {
+            includeGroup("com.tterrag.registrate")
+            includeGroup("com.simibubi.create")
+        }
+    }
 }
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
@@ -46,6 +62,11 @@ dependencies {
     //// Classic and simple status bars
     // CSSB classicandsimplestatusbars-1.0.11.jar
     modApi ("maven.modrinth:cssb:Vq7Rnhft")
+
+    // Create and its dependencies
+    modImplementation("com.simibubi.create:create-${minecraft_version}:${create_forge_version}:slim") { transitive = false }
+    modImplementation("com.tterrag.registrate:Registrate:${registrate_forge_version}")
+    modImplementation("com.jozufozu.flywheel:flywheel-forge-${flywheel_forge_minecraft_version}:${flywheel_forge_version}")
 }
 
 processResources {

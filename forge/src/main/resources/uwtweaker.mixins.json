@@ -4,7 +4,10 @@
   "package": "com.tkisor.uwtweaker.mixin.forge",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "CSSBMixin"
+    "CSSBMixin",
+    "create.press.BeltPressingCallbacksMixin",
+    "create.press.MechanicalPressBlockEntityMixin",
+    "create.press.PressingBehaviourMixin"
   ],
   "client": [
   ],

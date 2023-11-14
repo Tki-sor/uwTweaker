@@ -13,14 +13,6 @@ public class UwTweaker {
 	public static final String MOD_ID = "uwtweaker";
 
 	public static void init() {
-		try {
-			Field maximumValueField = RangedAttribute.class.getDeclaredField("f_22308_");
-			maximumValueField.setAccessible(true);
-			maximumValueField.set(Attributes.MAX_HEALTH, Double.MAX_VALUE);
-		} catch (Exception e) {
-			LogUtils.getLogger().error("UwTweaker failed to set max health to Double.MAX_VALUE: " + e.getMessage());
-		}
-
 		AutoConfig.register(UwTweakerConfig.class, GsonConfigSerializer::new);
 
 		Platform.getMod(MOD_ID).registerConfigurationScreen(config -> AutoConfig.getConfigScreen(UwTweakerConfig.class, config).get());
