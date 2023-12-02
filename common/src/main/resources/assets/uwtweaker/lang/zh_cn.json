@@ -1,0 +1,6 @@
+{
+  "text.autoconfig.uwtweaker.category.default": "UW Tweaker",
+  "text.autoconfig.uwtweaker.option.maxFoodLevel" : "Max Food Level",
+
+  "uwtweaker.ftbbackups2.backup.finished.end": "备份用时%s"
+}

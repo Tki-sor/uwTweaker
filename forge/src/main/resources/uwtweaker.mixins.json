@@ -7,7 +7,8 @@
     "CSSBMixin",
     "create.press.BeltPressingCallbacksMixin",
     "create.press.MechanicalPressBlockEntityMixin",
-    "create.press.PressingBehaviourMixin"
+    "create.press.PressingBehaviourMixin",
+    "ftbbackup.BackupHandlerMixin"
   ],
   "client": [
   ],
