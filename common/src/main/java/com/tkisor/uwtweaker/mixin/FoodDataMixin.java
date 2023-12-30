@@ -1,6 +1,5 @@
 package com.tkisor.uwtweaker.mixin;
 
-import com.tkisor.uwtweaker.config.UwTweakerConfig;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
@@ -8,16 +7,15 @@ import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(FoodData.class)
 public abstract class FoodDataMixin {
-    @Unique private final int uwTweaker$newLastFoodLevel = UwTweakerConfig.getConfig().getMaxFoodLevel();
-    @Shadow private int foodLevel = uwTweaker$newLastFoodLevel;
-    @Shadow private float saturationLevel = (float) (uwTweaker$newLastFoodLevel * 0.2);
+    private final int maxFoodLevel = 100;
+    @Shadow private int foodLevel = maxFoodLevel;
+    @Shadow private float saturationLevel = (float) (maxFoodLevel * 0.2);
     @Shadow private float exhaustionLevel;
     @Shadow private int tickTimer;
-    @Shadow private int lastFoodLevel = uwTweaker$newLastFoodLevel;
+    @Shadow private int lastFoodLevel = maxFoodLevel;
 
     /**
      * @author
@@ -25,8 +23,8 @@ public abstract class FoodDataMixin {
      */
     @Overwrite
     public void eat(int i, float itemStack) {
-        this.foodLevel = Math.min(i + this.foodLevel, uwTweaker$newLastFoodLevel);
-        this.saturationLevel = Math.min(this.saturationLevel + (float)i * itemStack * 2.0F, (float)this.foodLevel);
+        this.foodLevel = Math.min(i + this.foodLevel, maxFoodLevel);
+        this.saturationLevel = Math.min(this.saturationLevel + (float) i * itemStack * 2.0F, (float) this.foodLevel);
     }
 
     /**
@@ -48,20 +46,39 @@ public abstract class FoodDataMixin {
 
         boolean bl = player.level().getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION);
         // 满饥饿值
-        if (bl && this.saturationLevel > 0.0F && player.isHurt() && this.foodLevel >= uwTweaker$newLastFoodLevel) {
-            ++this.tickTimer;
-            if (this.tickTimer >= 10) {
-                float f = Math.min(this.saturationLevel, 6.0F);
-                player.heal(f / 6.0F);
-                this.addExhaustion(f);
-                this.tickTimer = 0;
+        if (bl && player.isHurt()) {
+            if (this.saturationLevel > 0.0F && this.foodLevel >= maxFoodLevel) {
+                ++this.tickTimer;
+                if (this.tickTimer >= 10) {  // 默认10
+                    float f = Math.min(this.saturationLevel, 6.0F);
+                    player.heal(f / 6.0F);
+                    this.addExhaustion(f);
+                    this.tickTimer = 0;
+                }
             }
-        } else if (bl && this.foodLevel >= (uwTweaker$newLastFoodLevel * 0.8) && player.isHurt()) {
-            ++this.tickTimer;
-            if (this.tickTimer >= 80) {
-                player.heal(1.0F);
-                this.addExhaustion(6.0F);
-                this.tickTimer = 0;
+            else if (this.foodLevel >= (maxFoodLevel * 0.75)) {
+                ++this.tickTimer;
+                if (this.tickTimer >= 80) {
+                    player.heal(1.0F);
+                    this.addExhaustion(6.0F);
+                    this.tickTimer = 0;
+                }
+            }
+            else if (this.foodLevel >= (maxFoodLevel * 0.4) && this.saturationLevel > 0.0F) {
+                ++this.tickTimer;
+                if (this.tickTimer >= 120) {
+                    player.heal(1.0F);
+                    this.addExhaustion(6.0F);
+                    this.tickTimer = 0;
+                }
+            }
+            else if (this.foodLevel >= (maxFoodLevel * 0.4)) {
+                ++this.tickTimer;
+                if (this.tickTimer >= 240) {
+                    player.heal(1.0F);
+                    this.addExhaustion(6.0F);
+                    this.tickTimer = 0;
+                }
             }
         } else if (this.foodLevel <= 0) {
             ++this.tickTimer;
@@ -69,7 +86,6 @@ public abstract class FoodDataMixin {
                 if (player.getHealth() > 10.0F || difficulty == Difficulty.HARD || player.getHealth() > 1.0F && difficulty == Difficulty.NORMAL) {
                     player.hurt(player.damageSources().starve(), 1.0F);
                 }
-
                 this.tickTimer = 0;
             }
         } else {
@@ -77,13 +93,14 @@ public abstract class FoodDataMixin {
         }
     }
 
+
     /**
      * @author
      * @reason
      */
     @Overwrite
     public boolean needsFood() {
-        return this.foodLevel < uwTweaker$newLastFoodLevel;
+        return this.foodLevel < maxFoodLevel;
     }
 
     @Shadow

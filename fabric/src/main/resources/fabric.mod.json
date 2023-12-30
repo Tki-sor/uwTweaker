@@ -12,7 +12,13 @@
   "icon": "icon.png",
 
   "environment": "*",
-  "entrypoints": {},
+  "entrypoints": {
+    "main": [
+      "com.tkisor.uwtweaker.fabric.UwTweakerFabric"
+    ],
+    "client": [
+    ]
+  },
   "mixins": [
     "uwtweaker.mixins.json",
     "uwtweaker-common.mixins.json"

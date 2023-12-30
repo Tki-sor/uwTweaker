@@ -49,9 +49,9 @@ repositories {
     }
 }
 dependencies {
-    forge "net.minecraftforge:forge:${rootProject.forge_version}"
+    forge "net.minecraftforge:forge:${forge_version}"
     // Remove the next line if you don't want to depend on the API
-    modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
+    modApi "dev.architectury:architectury-forge:${architectury_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
@@ -60,8 +60,8 @@ dependencies {
     //    runtimeOnly("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
 
     //// Classic and simple status bars
-    // CSSB classicandsimplestatusbars-1.0.11.jar
-    modApi ("maven.modrinth:cssb:Vq7Rnhft")
+    // CSSB classicandsimplestatusbars-1.0.13.jar
+    modApi ("maven.modrinth:cssb:6CugI4cs")
 
     // Create and its dependencies
     modImplementation("com.simibubi.create:create-${minecraft_version}:${create_forge_version}:slim") { transitive = false }
@@ -71,6 +71,17 @@ dependencies {
     // FTB Backup
     modImplementation("curse.maven:ftb-backups-2-622737:4834403")
     modImplementation("curse.maven:polylib-576589:4893433")
+
+    // Mixin Extra
+    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.1"))
+    implementation(include("io.github.llamalad7:mixinextras-forge:0.3.1"))
+
+    // EIO
+    modImplementation("maven.modrinth:enderio:FMFSRpRV")
+
+    // fancy menu
+    modImplementation "maven.modrinth:fancymenu:C7dPPLt1"
+    modImplementation "maven.modrinth:konkrete:9o3SSmd1"
 }
 
 processResources {

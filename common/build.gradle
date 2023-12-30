@@ -5,10 +5,24 @@ dependencies {
     // Remove the next line if you don't want to depend on the API
     modApi "dev.architectury:architectury:${rootProject.architectury_version}"
     modApi "me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}"
+
+    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.1"))
+    implementation(include("io.github.llamalad7:mixinextras-forge:0.3.1"))
+
+    // fancy menu
+    modImplementation "maven.modrinth:fancymenu:C7dPPLt1"
+    modImplementation "maven.modrinth:konkrete:9o3SSmd1"
 }
 
 architectury {
     common("fabric", "forge")
+}
+
+repositories {
+    // Add repositories to publish to here.
+    maven {
+        url = "https://api.modrinth.com/maven"
+    }
 }
 
 publishing {

@@ -2,5 +2,14 @@
   "text.autoconfig.uwtweaker.category.default": "UW Tweaker",
   "text.autoconfig.uwtweaker.option.maxFoodLevel" : "Max Food Level",
 
-  "uwtweaker.ftbbackups2.backup.finished.end": "Backup finished in %s"
+  "text.autoconfig.uwtweaker.option.upd8r": "Upd8r",
+  "text.autoconfig.uwtweaker.option.upd8r.@Tooltip": "Upd8r",
+  "text.autoconfig.uwtweaker.option.upd8r.CurrentVersionName": "Current Version Name",
+  "text.autoconfig.uwtweaker.option.upd8r.CurrentVersionName.@Tooltip": "Current Version Name",
+  "text.autoconfig.uwtweaker.option.upd8r.CurrentVersionCode": "Current Version Code",
+  "text.autoconfig.uwtweaker.option.upd8r.CurrentVersionCode.@Tooltip": "Current Version Code",
+  "text.autoconfig.uwtweaker.option.upd8r.CurrentVersionFormat": "Current Version Format",
+  "text.autoconfig.uwtweaker.option.upd8r.CurrentVersionFormat.@Tooltip": "Current Version Format",
+  "text.autoconfig.uwtweaker.option.upd8r.LatestVersionUrls": "Latest Version Urls",
+  "text.autoconfig.uwtweaker.option.upd8r.LatestVersionUrls.@Tooltip": "Latest Version Urls"
 }

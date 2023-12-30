@@ -19,11 +19,10 @@ public class UwTweakerConfig implements ConfigData {
     }
 
     @ConfigEntry.Gui.Tooltip
-    @ConfigEntry.Gui.TransitiveObject
-    @ConfigEntry.Category("createTweaker")
-    private CreateTweaker createTweaker = new CreateTweaker();
-    public CreateTweaker getCreateTweaker() {
-        return createTweaker;
+    @ConfigEntry.Gui.CollapsibleObject
+//    @ConfigEntry.Category("upd8r")
+    private Upd8rConfig upd8r = new Upd8rConfig();
+    public Upd8rConfig getUpd8rConfig() {
+        return upd8r;
     }
-
 }

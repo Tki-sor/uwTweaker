@@ -7,5 +7,6 @@ public class UwTweakerFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         UwTweaker.init();
+
     }
 }
